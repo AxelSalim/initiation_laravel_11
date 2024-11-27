@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // Register User   
-    public function register(Request $request) 
+    // Register User
+    public function register(Request $request)
     {
         // Validation
         $fields = $request->validate([
@@ -22,7 +22,7 @@ class AuthController extends Controller
         //Register
         $user = User::create($fields);
 
-        // Login 
+        // Login
         Auth::login($user);
 
         // Redirect
@@ -31,8 +31,8 @@ class AuthController extends Controller
     }
 
 
-    // Login User 
-    public function login(Request $request) 
+    // Login User
+    public function login(Request $request)
     {
         // Validation
         $fields = $request->validate([
@@ -40,13 +40,28 @@ class AuthController extends Controller
             'password' => ['required']
         ]);
 
-
         if (Auth::attempt($fields, $request->remember)) {
-            return redirect()->intended('home');
+            return redirect()->intended('dashboard');
         } else {
             return back()->withErrors([
                 'failed' => "Les informations d'identification fournies ne correspondent pas"
             ]);
         }
+    }
+
+    // Logout User
+    public function logout(Request $request)
+    {
+        // Logout the user
+        Auth::logout();
+
+        // Invalidate user's session
+        $request->session()->invalidate();
+
+        //Regenerate CSRF token
+        $request->session()->regenerateToken();
+
+        // Redirect to home
+        return redirect('/');
     }
 }
