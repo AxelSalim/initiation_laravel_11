@@ -2,9 +2,9 @@
 
   <h1 class="title">Latest Posts</h1>
 
-  <div class="grid grid-cols-2 gap-6">
+  <div class="grid grid-cols-2 gap-4">
     @foreach ($posts as $post)
-      <div class="bg-white p-8 m-4 rounded-md">
+      <div class="bg-white p-6 m-4 rounded-md">
         {{-- Title --}}
         <h2 class="font-semibold text-2xl">{{ $post->title }} </h2>
         {{-- Author and Date --}}
@@ -18,5 +18,10 @@
         </div>
       </div>
     @endforeach
+  </div>
+
+  <div class="">
+    {{-- Pagination --}}
+    {{ $posts->links() }}
   </div>
 </x-layout>
