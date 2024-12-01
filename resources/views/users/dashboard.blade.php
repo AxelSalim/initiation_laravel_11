@@ -38,4 +38,19 @@
       <button class="btn w-full py-2 bg-[#1e293b] text-white rounded-md">Create</button>
     </form>
   </div>
+
+
+  {{-- User Posts --}}
+  <h1 class="title">Your Latest Posts</h1>
+
+  <div class="grid grid-cols-2 gap-4">
+    @foreach ($posts as $post)
+      <x-postCard :post="$post"/>
+    @endforeach
+  </div>
+
+  <div class="">
+    {{-- Pagination --}}
+    {{ $posts->links() }}
+  </div>
 </x-layout>
