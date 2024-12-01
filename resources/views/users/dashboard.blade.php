@@ -1,16 +1,17 @@
 <x-layout>
   <h1 class="text-xl font-semibold">Hello {{ auth()->user()->username }}</h1>
 
-  {{-- Session Messages --}}
-  @if (session('success'))
-    <div>
-      <p>{{ session('success') }} </p>
-    </div>
-  @endif
-
   {{-- Create Post Form --}}
   <div class="bg-white p-6 my-6 rounded-md mb-4">
     <h2 class="font-bold mb-4">Create a new post</h2>
+
+
+    {{-- Session Messages --}}
+    @if (session('success'))
+    <div class="mb-2">
+        <x-flashMsg msg="{{ session('success') }}"/>
+      </div>
+    @endif
 
     <form action="{{ route('posts.store') }}" method="post">
       @csrf
