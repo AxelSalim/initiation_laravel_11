@@ -38,7 +38,7 @@ class PostController extends Controller
       ]);
 
       // Create a post
-      Auth::user()->posts()->create($fields);
+      Post::create(['user_id' => Auth::id(), ...$fields]);
 
       // Redirect to dashboard
       return back()->with('success', 'Your post was created');
