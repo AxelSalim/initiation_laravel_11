@@ -6,8 +6,8 @@
   <h2 class="font-semibold text-2xl">{{ $post->title }} </h2>
   {{-- Author and Date --}}
   <div class="text-xs font-light mb-4">
-      <span>Posted {{ $post->created_at->diffForHumans() }}</span>
-      <a href="" class="text-blue-500 font-medium">USERNAME</a>
+      <span>Posted {{ $post->created_at->diffForHumans() }} by</span>
+      <a href="{{ route('posts.user', $post->user)}}" class="text-blue-500 font-medium">{{ $post->user->username }}</a>
   </div>
   {{-- Body --}}
   <div class="text-md">

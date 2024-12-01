@@ -14,6 +14,8 @@ Route::fallback(function() {
 Route::view('/', 'posts.index')->name('home');
 Route::resource('/posts', PostController::class);
 
+Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('posts.user');
+
 Route::middleware('auth')->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
